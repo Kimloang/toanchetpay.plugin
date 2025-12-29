@@ -8,7 +8,6 @@ public class OpenSessionResultDto {
     int code;
     String errorDetails;
     String sessionid;
-//    OpenSessionXtransactionDto xTran;
     String qrValue;
     int purchaseAmount;
 
@@ -44,13 +43,6 @@ public class OpenSessionResultDto {
         this.sessionid = sessionid;
     }
 
-//    public OpenSessionXtransactionDto getxTran() {
-//        return xTran;
-//    }
-//
-//    public void setxTran(OpenSessionXtransactionDto xTran) {
-//        this.xTran = xTran;
-//    }
 
     public String getQrValue() {
         return qrValue;

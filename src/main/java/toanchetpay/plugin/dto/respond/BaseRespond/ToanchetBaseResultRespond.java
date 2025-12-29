@@ -1,4 +1,4 @@
-package toanchetpay.plugin.dto.respond.BaseRespond;
+package toanchetpay.plugin.dto.respond.baseRespond;
 
 public class ToanchetBaseResultRespond {
     private int purchaseAmount;

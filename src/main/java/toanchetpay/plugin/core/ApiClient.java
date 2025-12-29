@@ -16,7 +16,8 @@ public class ApiClient {
         return Json.fromJson(response, type);
     }
     public <T> T get(String path, Class<T> type) throws JsonProcessingException {
-        String response = http.get(toanchetPayRoot.baseUrl()  , path);
+        String response = http.get(toanchetPayRoot.baseUrl()+path);
         return Json.fromJson(response, type);
     }
+        
 }

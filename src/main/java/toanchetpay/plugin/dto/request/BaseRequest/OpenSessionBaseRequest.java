@@ -1,4 +1,4 @@
-package toanchetpay.plugin.dto.request.BaseRequest;
+package toanchetpay.plugin.dto.request.baseRequest;
 
 public class OpenSessionBaseRequest {
     private String loginId;
@@ -37,5 +37,4 @@ public class OpenSessionBaseRequest {
     public void setLoginId(String loginId) {
         this.loginId = loginId;
     }
-
 }

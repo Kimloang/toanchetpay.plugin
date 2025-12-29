@@ -1,34 +1,54 @@
 package toanchetpay.plugin.core;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import okhttp3.*;
+import toanchetpay.plugin.exception.ToanChetPayException;
+
+import java.io.IOException;
 
 public class HttpExecutor {
-    private final HttpClient client = HttpClient.newHttpClient();
+
+    private static final MediaType JSON
+            = MediaType.parse("application/json; charset=utf-8");
+
+    private final OkHttpClient client = new OkHttpClient();
+
     public String post(String url, String json) {
-        var request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(json))
+        RequestBody body = RequestBody.create(json, JSON);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .addHeader("Content-Type", "application/json")
                 .build();
 
-        try {
-            return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        } catch (Exception ex) {
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new ToanChetPayException(
+                        response.code(),response.message()
+                );
+            }
+            return response.body() != null ? response.body().string() : "";
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
-    public String get(String url,String json) {
-        var request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
+
+    public String get(String url) {
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
                 .build();
-        try {
-            return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        } catch (Exception ex) {
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new ToanChetPayException(
+                        response.code(),response.message()
+                );
+            }
+            return response.body() != null ? response.body().string() : "";
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
 }
+
