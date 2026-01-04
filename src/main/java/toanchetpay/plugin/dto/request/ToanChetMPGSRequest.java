@@ -7,28 +7,27 @@ import toanchetpay.plugin.dto.request.baseRequest.OpenSessionBaseRequest;
 import toanchetpay.plugin.dto.request.baseRequest.OpenSessionXpayTransactionBaseRequest;
 import toanchetpay.plugin.util.ToanChetUtil;
 
-public class ToanchetKhQrRequest extends OpenSessionBaseRequest implements IToanchetPayBaseContract {
-
+public class ToanChetMPGSRequest  extends OpenSessionBaseRequest implements IToanchetPayBaseContract {
     private final ToanchetPayRoot toanchetPayRoot;
-    private XpayTransaction xpayTransaction;
+    private ToanChetMPGSRequest.XPayTransaction xpayTransaction;
     @Override
     public void setCredentials(ToanchetPayRoot toanchetPayRoot) {
         super.setLoginId(toanchetPayRoot.loginId());
         super.setPassword(toanchetPayRoot.password());
         super.setMerchantID(toanchetPayRoot.merchantId());
     }
-    public ToanchetKhQrRequest(ToanchetPayRoot toanchetPayRoot){
+    public ToanChetMPGSRequest(ToanchetPayRoot toanchetPayRoot){
         setCredentials(toanchetPayRoot);
         this.toanchetPayRoot = toanchetPayRoot;
     }
-    public XpayTransaction getXpayTransaction() {
+    public ToanChetMPGSRequest.XPayTransaction getXpayTransaction() {
         return xpayTransaction;
     }
-    public void setXpayTransaction(XpayTransaction xpayTransaction) {
+    public void setXpayTransaction(ToanChetMPGSRequest.XPayTransaction xpayTransaction) {
         this.xpayTransaction = xpayTransaction;
         super.setHash(ToanChetUtil.buildHashForOpenSession(super.getLoginId(), super.getPassword(), super.getMerchantID(), xpayTransaction.getTxid(), toanchetPayRoot.secretKey()));
     }
-    public static class XpayTransaction extends OpenSessionXpayTransactionBaseRequest {
+    public static  class XPayTransaction  extends OpenSessionXpayTransactionBaseRequest {
         private String operationType;
         public String getOperationType() {
             return operationType;

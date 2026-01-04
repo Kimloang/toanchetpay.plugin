@@ -2,8 +2,9 @@ package toanchetpay.plugin.dto.respond.baseRespond;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import toanchetpay.plugin.dto.respond.ToanchetCheckTransactionRespond;
 
-public class ToanchetPayKhQrBaseResultRespond {
+public class ToanchetPayCheckStatusBaseRespond {
     @JsonProperty("TxDirection")
     private int TxDirection;
     private int code;
@@ -11,7 +12,7 @@ public class ToanchetPayKhQrBaseResultRespond {
     private String sessionid;
     @JsonProperty("xTran")
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private ToanchetBaseResultRespond xTran;
+    private ToanchetCheckStatusExtendRespond xTran;
     private int purchaseAmount;
 
     public int getTxDirection() { return TxDirection; }
@@ -26,10 +27,6 @@ public class ToanchetPayKhQrBaseResultRespond {
     public String getSessionid() { return sessionid; }
     public void setSessionid(String sessionid) { this.sessionid = sessionid; }
 
-    public ToanchetBaseResultRespond getXTran() { return xTran; }
-    public void setXTran(ToanchetBaseResultRespond xTran) { this.xTran = xTran; }
-
-
-    public int getPurchaseAmount() { return purchaseAmount; }
-    public void setPurchaseAmount(int purchaseAmount) { this.purchaseAmount = purchaseAmount; }
+    public ToanchetCheckStatusExtendRespond getXTran() { return xTran; }
+    public void setXTran(ToanchetCheckStatusExtendRespond xTran) { this.xTran = xTran; }
 }

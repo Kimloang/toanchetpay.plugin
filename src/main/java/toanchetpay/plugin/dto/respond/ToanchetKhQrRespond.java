@@ -1,7 +1,7 @@
 package toanchetpay.plugin.dto.respond;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import toanchetpay.plugin.dto.respond.BaseRespond.ToanchetPayKhQrBaseResultRespond;
+import toanchetpay.plugin.dto.respond.baseRespond.ToanchetPayKhQrBaseResultRespond;
 
 public class ToanchetKhQrRespond {
     private Result result;

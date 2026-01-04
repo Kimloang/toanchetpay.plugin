@@ -1,11 +1,14 @@
-package toanchetpay.plugin.dto.request.BaseRequest;
+package toanchetpay.plugin.dto.request.baseRequest;
 
+import toanchetpay.plugin.app.EToanchetCurrency;
 import toanchetpay.plugin.util.ToanChetUtil;
+
+import java.math.BigDecimal;
 
 public class OpenSessionXpayTransactionBaseRequest {
     private String txid;
-    private String purchaseAmount;
-    private String purchaseCurrency;
+    private BigDecimal purchaseAmount;
+    private EToanchetCurrency purchaseCurrency;
     private String purchaseDate;
     private String purchaseDesc;
     private String invoiceid;
@@ -72,19 +75,19 @@ public class OpenSessionXpayTransactionBaseRequest {
         this.purchaseDate = purchaseDate;
     }
 
-    public String getPurchaseCurrency() {
+    public EToanchetCurrency getPurchaseCurrency() {
         return purchaseCurrency;
     }
 
-    public void setPurchaseCurrency(String purchaseCurrency) {
+    public void setPurchaseCurrency(EToanchetCurrency purchaseCurrency) {
         this.purchaseCurrency = purchaseCurrency;
     }
 
-    public String getPurchaseAmount() {
+    public BigDecimal getPurchaseAmount() {
         return purchaseAmount;
     }
 
-    public void setPurchaseAmount(String purchaseAmount) {
+    public void setPurchaseAmount(BigDecimal purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
     }
 

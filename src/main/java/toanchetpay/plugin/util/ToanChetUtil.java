@@ -1,11 +1,21 @@
 package toanchetpay.plugin.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import toanchetpay.plugin.ToanchetPaySdk;
+import toanchetpay.plugin.app.EToanchetCurrency;
+import toanchetpay.plugin.client.ToanchetPayRoot;
+import toanchetpay.plugin.dto.request.ToanChetGetTransactionStatusRequest;
+import toanchetpay.plugin.dto.request.ToanChetMPGSRequest;
 import toanchetpay.plugin.dto.request.ToanchetDeeplinkRequest;
 import toanchetpay.plugin.dto.request.ToanchetKhQrRequest;
+import toanchetpay.plugin.dto.respond.*;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ToanChetUtil {
     public static String buildHashForOpenSession(
@@ -19,24 +29,19 @@ public class ToanChetUtil {
         return hmacHex(raw,secretKey).toUpperCase();
     }
 
-    public static String buildHashForOpenSession(
-            ToanchetKhQrRequest openSessionRequest,
+    public static String buildHashForOpenSessionCheckStatus(
+            String loginId,
+            String password,
+            String merchantId,
+            String txtId,
             String secretKey
     ) {
-        String raw = openSessionRequest.getMerchantID()  + openSessionRequest.getLoginId() + openSessionRequest.getPassword() + openSessionRequest.getXpayTransaction().getTxid();
+        String raw = merchantId + loginId + password + txtId;
         return hmacHex(raw,secretKey).toUpperCase();
     }
-    public static String buildHashForOpenSession(
-            ToanchetDeeplinkRequest openSessionRequest,
-            String secretKey
-    ) {
-        String raw = openSessionRequest.getMerchantID()  + openSessionRequest.getLoginId() + openSessionRequest.getPassword() + openSessionRequest.getXpayTransaction().getTxid();
-        return hmacHex(raw,secretKey).toUpperCase();
-    }
-
     private static String hmacHex(String message, String key) {
         try {
-                Mac mac = Mac.getInstance("HmacSHA512");
+            Mac mac = Mac.getInstance("HmacSHA512");
             SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA512");
             mac.init(secretKey);
             byte[] bytes = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));

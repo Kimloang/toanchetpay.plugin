@@ -1,9 +1,9 @@
 package toanchetpay.plugin.dto.request.baseRequest;
 
-public class OpenSessionBaseRequest {
+public class OpenSessionBaseCheckStatusRequest {
     private String loginId;
     private String password;
-    private String merchantID;
+    private String merchantId;
     private String hash;
 
     public String getHash() {
@@ -14,12 +14,12 @@ public class OpenSessionBaseRequest {
         this.hash = hash;
     }
 
-    public String getMerchantID() {
-        return merchantID;
+    public String getMerchantId() {
+        return merchantId;
     }
 
-    protected void setMerchantID(String merchantID) {
-        this.merchantID = merchantID;
+    protected void setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
     }
 
     public String getPassword() {
