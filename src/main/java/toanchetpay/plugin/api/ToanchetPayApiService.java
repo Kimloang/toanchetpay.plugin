@@ -9,6 +9,7 @@ import toanchetpay.plugin.dto.request.ToanChetMPGSRequest;
 import toanchetpay.plugin.dto.request.ToanchetDeeplinkRequest;
 import toanchetpay.plugin.dto.request.ToanchetKhQrRequest;
 import toanchetpay.plugin.dto.respond.*;
+import toanchetpay.plugin.exception.ToanChetPayException;
 
 public class ToanchetPayApiService {
     private final ApiClient apiClient;
@@ -29,15 +30,15 @@ public class ToanchetPayApiService {
         return  apiClient.post(ToanChetPayConst.defalutEndPoint,toanchetDeeplinkRequest, ToanChetDeepLinkRespond.class);
     }
 
-    public ToanchetCheckTransactionRespond checkTransactionStatus(ToanChetGetTransactionStatusRequest toanchetDeeplinkRequest) throws JsonProcessingException {
-        return apiClient.post(ToanChetPayConst.endPointCheckStatus, toanchetDeeplinkRequest, ToanchetCheckTransactionRespond.class);
+    public  <T> T  checkTransactionStatus(ToanChetGetTransactionStatusRequest toachetCheckStatus,Class<T> type) throws JsonProcessingException {
+        if(type.equals(ToanchetMPGSCheckTransctaionRespond.class) ||
+                type.equals(ToanchetCheckTransactionRespond.class))
+            return apiClient.post(ToanChetPayConst.endPointCheckStatus, toachetCheckStatus,type);
+        throw new ToanChetPayException(-1," Invalid Class To Respond");
     }
 
     public ToanChetMPGSRespond mpgs(ToanChetMPGSRequest toanchetDeeplinkRequest) throws JsonProcessingException {
         return  apiClient.post(ToanChetPayConst.defalutEndPoint,toanchetDeeplinkRequest, ToanChetMPGSRespond.class);
     }
 
-    public ToanchetMPGSCheckTransctaionRespond checkTransactionStatusMPGS(ToanChetGetTransactionStatusRequest toanchetDeeplinkRequest) throws JsonProcessingException {
-        return apiClient.post(ToanChetPayConst.endPointCheckStatus, toanchetDeeplinkRequest, ToanchetMPGSCheckTransctaionRespond.class);
-    }
 }
