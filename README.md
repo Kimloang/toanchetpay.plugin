@@ -199,3 +199,102 @@ public class PaymentExample {
 
 ```
 
+## Check Transaction Status (Standard)
+Use this method for standard payment transactions. The response map  to `ToanchetCheckTransactionRespond`.
+
+```java
+import toanchetpay.plugin.dto.request.ToanchetDeeplinkRequest;
+import toanchetpay.plugin.dto.respond.ToanChetDeepLinkRespond;
+import toanchetpay.plugin.client.ToanchetPayRoot;
+import toanchetpay.plugin.ToanchetPaySdk;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class PaymentExample {
+    public static void main(String[] args) {
+        try {
+            try {
+                // 1. Set Up Credentials
+                ToanchetPayRoot toanchetConfig = new ToanchetPayRoot(
+                        "https://epaymentuat.acledabank.com.kh", // Base URL (Ensure no trailing slash if SDK adds it)
+                        "YOUR_LOGIN_ID",
+                        "YOUR_PASSWORD",
+                        "YOUR_MERCHANT_ID",
+                        "YOUR_SECRET_KEY"
+                );
+
+                // 2. Initialize SDK
+                ToanchetPaySdk sdk = new ToanchetPaySdk(toanchetConfig);
+
+                // 3. Setup Request Object
+                ToanChetGetTransactionStatusRequest request = new ToanChetGetTransactionStatusRequest(toanchetConfig,
+                        "YOUR_PAYMENT_TOKENID","YOUR_MERCHANT_NAME");
+                // 4. Execute Call
+                ToanchetCheckTransactionRespond response = sdk.apiService.checkTransactionStatus(request, ToanchetCheckTransactionRespond.class);
+
+                // 5. Handle Response
+                if (response != null) {
+                    System.out.println("KHQR Link: " + response.getResult().getErrorDetails());
+                    System.out.println("Status Code: " + response.getResult().getCode());
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+}
+
+```
+
+##  Check Transaction Status (MPGS)
+Since there are two type of Respond of Different of context
+
+Since  **MPGS** Has one Object Call **getTxnStatusMPGS** To archive you have to use this 
+Object **ToanchetMPGSCheckTransctaionRespond**
+
+```java
+import toanchetpay.plugin.dto.request.ToanchetDeeplinkRequest;
+import toanchetpay.plugin.dto.respond.ToanChetDeepLinkRespond;
+import toanchetpay.plugin.client.ToanchetPayRoot;
+import toanchetpay.plugin.ToanchetPaySdk;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class PaymentExample {
+    public static void main(String[] args) {
+        try {
+            try {
+                // 1. Set Up Credentials
+                ToanchetPayRoot toanchetConfig = new ToanchetPayRoot(
+                        "https://epaymentuat.acledabank.com.kh", // Base URL (Ensure no trailing slash if SDK adds it)
+                        "YOUR_LOGIN_ID",
+                        "YOUR_PASSWORD",
+                        "YOUR_MERCHANT_ID",
+                        "YOUR_SECRET_KEY"
+                );
+
+                // 2. Initialize SDK
+                ToanchetPaySdk sdk = new ToanchetPaySdk(toanchetConfig);
+
+                // 3. Setup Request Object
+                ToanChetGetTransactionStatusRequest request = new ToanChetGetTransactionStatusRequest(toanchetConfig,
+                        "YOUR_PAYMENT_TOKENID","YOUR_MERCHANT_NAME");
+                // 4. Execute Call
+                ToanchetMPGSCheckTransctaionRespond response = sdk.apiService.checkTransactionStatus(request, ToanchetMPGSCheckTransctaionRespond.class);
+                // 5. Handle Response
+                if (response != null) {
+                    System.out.println("KHQR Link: " + response.getResult().getErrorDetails());
+                    System.out.println("Status Code: " + response.getResult().getCode());
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+}
+
+```
+
+
