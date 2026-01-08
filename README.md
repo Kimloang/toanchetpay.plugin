@@ -251,7 +251,7 @@ public class PaymentExample {
 Since there are two type of Respond of Different of context
 
 Since  **MPGS** Has one Object Call **getTxnStatusMPGS** To archive you have to use this 
-Object **ToanchetMPGSCheckTransctaionRespond**
+Object `ToanchetMPGSCheckTransctaionRespond`
 
 ```java
 import toanchetpay.plugin.dto.request.ToanchetDeeplinkRequest;
